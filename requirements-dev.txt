@@ -1,0 +1,5 @@
+clang-format==18.1.8
+clang-tidy==21.1.6
+libclang==18.1.1
+cpplint==2.0.2
+pre-commit==4.2.0

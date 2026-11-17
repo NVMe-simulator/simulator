@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: CMake and code style
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      CXX: clang++-18
+      PIP_DISABLE_PIP_VERSION_CHECK: '1'
+    steps:
+      - name: Check out sources
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - name: Install C++ build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y clang-18 cmake make
+      - name: Install code style tools
+        run: |
+          python3 -m venv .venv
+          .venv/bin/python -m pip install -r requirements-dev.txt
+      - name: Validate pre-commit configuration
+        run: .venv/bin/pre-commit validate-config
+      - name: Configure CMake
+        run: cmake --preset dev
+      - name: Build
+        run: cmake --build --preset dev --parallel 2
+      - name: Check code style
+        run: cmake --build --preset dev --target lint

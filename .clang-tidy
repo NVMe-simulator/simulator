@@ -1,0 +1,48 @@
+Checks: >-
+  -*,
+  google-*,
+  -google-readability-todo,
+  readability-identifier-naming,
+  modernize-use-override,
+  modernize-use-nullptr
+WarningsAsErrors: '*'
+HeaderFilterRegex: '.*'
+SystemHeaders: false
+FormatStyle: file
+CheckOptions:
+  # T/I classification is checked by tools/check_records.py, not AbstractClassPrefix.
+  readability-identifier-naming.ClassCase: CamelCase
+  readability-identifier-naming.StructCase: CamelCase
+  readability-identifier-naming.UnionCase: CamelCase
+  readability-identifier-naming.UnionPrefix: T
+  readability-identifier-naming.EnumCase: CamelCase
+  readability-identifier-naming.EnumPrefix: E
+  # Enum values depend on scope and on the enum's initials: checked in the AST.
+  readability-identifier-naming.EnumConstantIgnoredRegexp: '.*'
+  readability-identifier-naming.NamespaceCase: CamelCase
+  readability-identifier-naming.NamespacePrefix: N
+  readability-identifier-naming.InlineNamespaceCase: CamelCase
+  readability-identifier-naming.InlineNamespacePrefix: N
+  readability-identifier-naming.FunctionCase: CamelCase
+  readability-identifier-naming.FunctionIgnoredRegexp: '^main$'
+  readability-identifier-naming.MethodCase: CamelCase
+  readability-identifier-naming.VariableCase: lower_case
+  readability-identifier-naming.ParameterCase: lower_case
+  # Fields use CamelCase with a trailing underscore only for private access.
+  # check_records.py enforces it; ClassMember in clang-tidy means static members.
+  readability-identifier-naming.MemberCase: aNy_CasE
+  readability-identifier-naming.MemberIgnoredRegexp: '.*'
+  readability-identifier-naming.ClassMemberCase: aNy_CasE
+  readability-identifier-naming.ClassMemberIgnoredRegexp: '.*'
+  readability-identifier-naming.GlobalConstantCase: CamelCase
+  readability-identifier-naming.GlobalConstantPrefix: k
+  readability-identifier-naming.StaticConstantCase: CamelCase
+  readability-identifier-naming.StaticConstantPrefix: k
+  readability-identifier-naming.ClassConstantCase: CamelCase
+  readability-identifier-naming.ClassConstantPrefix: k
+  readability-identifier-naming.ConstexprVariableCase: CamelCase
+  readability-identifier-naming.ConstexprVariablePrefix: k
+  readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
+  readability-identifier-naming.TypeAliasCase: CamelCase
+  readability-identifier-naming.TypedefCase: CamelCase
+  readability-identifier-naming.TypeTemplateParameterCase: CamelCase

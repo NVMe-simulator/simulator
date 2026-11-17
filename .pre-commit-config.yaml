@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: cpp-style
+        name: C++ formatting, Google style and naming
+        entry: .venv/bin/python tools/lint.py
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,16 @@
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 120
+IncludeBlocks: Regroup
+IncludeCategories:
+  # Project headers keep the Google "other headers" group even with <>.
+  - Regex: '^<(src|app)/'
+    Priority: 3
+  - Regex: '^<ext/.*\.h>'
+    Priority: 2
+  - Regex: '^<.*\.h>'
+    Priority: 1
+  - Regex: '^<.*'
+    Priority: 2
+  - Regex: '.*'
+    Priority: 3

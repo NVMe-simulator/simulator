@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+cmake-build-*/
+compile_commands.json
+.cache/
+.DS_Store
+CMakeUserPresets.json
+# Also ignore artifacts from an accidental in-source CMake invocation.
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+DartConfiguration.tcl
+Testing/
+.ninja_deps
+.ninja_log
+build.ninja
